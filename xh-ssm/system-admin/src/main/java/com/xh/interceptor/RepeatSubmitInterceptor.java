@@ -1,5 +1,6 @@
 package com.xh.interceptor;
 
+import com.xh.annotation.Repeat;
 import com.xh.configuration.CustomObjectMapper;
 import com.xh.constant.Constants;
 import com.xh.core.RedisTemplate;
