@@ -75,7 +75,7 @@ public class RepeatSubmitInterceptor implements HandlerInterceptor {
             return true;
         }
         // 否则我就存入redis，注意设置过期时间
-        redisTemplate.set(cacheRepeatKey, nowParams, annotation.value());
+        redisTemplate.set(cacheRepeatKey, nowParams,annotation.value());
         return false;
     }
 }

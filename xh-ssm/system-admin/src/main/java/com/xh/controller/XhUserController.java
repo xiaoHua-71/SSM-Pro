@@ -1,20 +1,20 @@
 package com.xh.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.xh.annotation.HasPermission;
 import com.xh.annotation.HasRole;
 import com.xh.annotation.Log;
-import com.xh.constant.Constants;
 import com.xh.core.RedisTemplate;
-import com.xh.entity.XhLoginUser;
 import com.xh.entity.XhUser;
 import com.xh.service.XhUserService;
+import com.xh.xhEnum.DeleteFlagEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -75,7 +75,14 @@ public class XhUserController  extends BaseController{
     @PostMapping
     @HasRole({"admin","hr"})
     @Log(title = "创建用户",businessType = "用户操作")
-    public ResponseEntity<XhUser> add(XhUser xhUser) {
+    public ResponseEntity<XhUser> add(@RequestBody XhUser xhUser, HttpServletRequest request) {
+        //获得ip
+        xhUser.setLoginIp(request.getRemoteHost());
+        xhUser.setCreateTime(new Date());
+        xhUser.setCreateBy(getLoginUser().getXhUser().getUserName());
+        xhUser.setStatus("0");
+        //逻辑删除标志
+        xhUser.setDelFlag(DeleteFlagEnum.NO.getValue());
 
         return ResponseEntity.ok(this.xhUserService.insert(xhUser));
     }
@@ -87,7 +94,7 @@ public class XhUserController  extends BaseController{
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<XhUser> edit(XhUser xhUser) {
+    public ResponseEntity<XhUser> edit(@RequestBody XhUser xhUser) {
         return ResponseEntity.ok(this.xhUserService.update(xhUser));
     }
 
@@ -97,8 +104,8 @@ public class XhUserController  extends BaseController{
      * @param id 主键
      * @return 删除是否成功
      */
-    @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(Long id) {
+    @DeleteMapping("{id}")
+    public ResponseEntity<Boolean> deleteById(@PathVariable Long id) {
 
         return ResponseEntity.ok(this.xhUserService.deleteById(id));
     }

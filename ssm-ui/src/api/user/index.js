@@ -26,6 +26,23 @@ export function login(data) {
         data: data
     })
 }
+//新增用户
+export function add(data) {
+    return request({
+        url: '/xhUser',
+        method: 'post',
+        data: data
+    })
+}
+
+//修改用户
+export function update(data) {
+    return request({
+        url: '/xhUser',
+        method: 'put',
+        data: data
+    })
+}
 
 export function logout() {
     return request({
@@ -53,6 +70,13 @@ export function getById(id) {
     return request({
         url: '/xhUser/' + id,
         method: 'get'
+    })
+}
+
+export function deleteUser(id) {
+    return request({
+        url: '/xhUser/' + id,
+        method: 'delete'
     })
 }
 	

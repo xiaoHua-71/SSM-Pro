@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Repeat {
 
-    int value() default 10;
+    long value() default 10;
 
 }

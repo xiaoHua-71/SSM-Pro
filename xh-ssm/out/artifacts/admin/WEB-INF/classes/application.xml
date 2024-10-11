@@ -95,6 +95,10 @@
             <!--class属性就是我们自定义的拦截器-->
             <bean id="loginInterceptor" class="com.xh.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="RepeatSubmitInterceptor" class="com.xh.interceptor.RepeatSubmitInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <!--数据源-->

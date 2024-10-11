@@ -17,5 +17,6 @@ public class Constants {
     public static final String ROLE_PREFIX = "roles:";
     //权限前缀
     public static final String PERM_PREFIX = "perm:";
-    public static final String REPEAT_SUBMIT_KEY = ;
+    //防止重复提交的前缀
+    public static final String REPEAT_SUBMIT_KEY = "repeat";
 }

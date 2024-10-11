@@ -96,8 +96,8 @@
 
 <style scope>
 	.el-image {
-		height: 885px;
-		width: 750px;
+		height: 700px;
+		width: 600px;
 	}
 
 	.el-main {
